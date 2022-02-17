@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Project;
 
 class ProjectsController extends Controller
 {
@@ -26,4 +26,13 @@ class ProjectsController extends Controller
 
         return redirect('/profile/'.auth()->user()->id);
     }
+
+    public function show(Project $project){
+
+        return view('projects.show',[
+            'project' => $project
+        ]);
+    }
+
+    
 }
