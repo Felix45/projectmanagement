@@ -28,7 +28,21 @@ class User extends Authenticatable
     ];
 
     public function projects(){
-        return $this->hasMany(Project::class);
+        return $this->hasMany(Project::class)->orderBy('created_at','DESC');
+    }
+
+    protected static function boot(){
+        parent::boot();
+        static::created(function($user){
+            $user->profile()->create([
+                'quote' => '',
+                'description' => ''
+            ]);
+        });
+    }
+
+    public function tasks(){
+        return $this->hasMany(Task::class)->orderBy('created_at','DESC');
     }
 
     public function profile(){
