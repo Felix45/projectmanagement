@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
       <div class="col-md-8 offset-2">
-       <form action="{{route('profile',$user->profile->id)}}" method="post" enctype="multipart/form-data"> 
+       <form action="{{route('profile',$user->id)}}" method="post" enctype="multipart/form-data"> 
        @csrf
        @method('PATCH')
        
@@ -67,6 +67,6 @@
             </form>
           </div>
       </div>
-    </div>        
+    </div>      
 </div>
 @endsection

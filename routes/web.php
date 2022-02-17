@@ -27,3 +27,5 @@ Route::get('/project/create','ProjectsController@create')->name('create_project'
 Route::get('/project/{project}','ProjectsController@show')->name('show_project');
 Route::get('/project/{project}/edit','ProjectsController@update')->name('projects.update');
 Route::post('/project/','ProjectsController@store');
+
+Route::post('/task/create','TasksController@create')->name('tasks.create');
