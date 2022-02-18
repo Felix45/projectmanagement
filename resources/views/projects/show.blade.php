@@ -38,9 +38,11 @@
                       <th>{{ __('Priority') }}</th>
                       <th>{{ __('Task Status') }}</th>
                       <th>{{ __('Assigned to') }}</th>
+                      <th>{{ __('Visibility') }}</th>
                       <th>{{ __('Due date') }}</th>
                     </tr>
                 @foreach($project->tasks as $task)
+                @can('view',$task)
                   <tr>
                       <td>{{ $task->description }}</td>
                       <td>{{ $task->priority == 1 ? "High" : "Low" }}</td>
@@ -50,8 +52,10 @@
                             <a href="{{ route('profile',$assignee->id) }}">{{ $assignee->name }}</a>,
                           @endforeach
                       </td>
+                      <td>{{ $task->visibility === 1 ? "Public" : "Private" }}</td>
                       <td>{{ $task->due_date }}</td>
                   </tr>
+                  @endcan
                 @endforeach
                 </table>
               </div>
@@ -82,11 +86,26 @@
             </div>
 
             <div class="col-md-12">
-                <input id="due_date" type="date" class="form-control{{ $errors->has('due_date') ? ' is-invalid' : '' }}" name="due_date" value="{{ old('duedate') }}" required autofocus>
+                <input id="due_date" type="date" class="form-control{{ $errors->has('due_date') ? ' is-invalid' : '' }}" name="due_date" value="{{ old('due_date') }}" required autofocus>
 
                 @if($errors->has('due_date'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('due_date') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group row">
+            <div>
+                <label for="documents" class="col-md-12 col-form-label text-md-right"><strong>{{ __('Upload Documents') }}</strong></label>
+            </div>
+
+            <div class="col-md-12">
+                <input id="documents" type="file" class="form-control{{ $errors->has('documents') ? ' is-invalid' : '' }}" name="documents[]" value="{{ old('documents') }}" autofocus multiple>
+
+                @if($errors->has('documents'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('documents') }}</strong>
                     </span>
                 @endif
             </div>
@@ -96,7 +115,7 @@
         <div class="form-group row">
             
             <div class="col-md-12">
-                <input id="visibility" type="checkbox"  name="visibility" value="1" autofocus> {{ __('Private') }}
+                <input id="visibility" type="checkbox"  name="visibility" value="2" autofocus> {{ __('Private') }}
                 
                 <div>
                     <label for="priority" class="col-md-12 col-form-label pl-0"><strong>{{ __('Task Priority') }}</strong></label>
