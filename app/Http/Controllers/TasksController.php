@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class TasksController extends Controller
 {
@@ -13,10 +14,18 @@ class TasksController extends Controller
             'description' => 'required|string',
             'project_id'  => 'required|integer',
             'visibility'  => '',
-            'priority'    => ''
+            'priority'    => '',
+            'assignee' => 'required'
         ]);
         $data['user_id'] = auth()->user()->id;
-        auth()->user()->tasks()->create($data);
+        $assignees = $data['assignee'];
+        unset($data['assignee']);
+       
+        $task = auth()->user()->tasks()->create($data);
+
+        $users = User::find($assignees);
+        
+        $task->assignees()->attach($users);
 
         return redirect('/project/'.$data['project_id']);
     }

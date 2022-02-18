@@ -21,7 +21,7 @@
            
            <div class="d-flex">
                <div class="pr-5"><strong>{{ $user->projects->count() }}</strong> Project(s)</div>
-               <div class="pr-5"><strong>Completed tasks</strong> 120</div>
+               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> Assigned tasks</div>
                <div class="pr-5"><strong>Pending tasks</strong> 3</div>
            </div>
            <div>
@@ -45,7 +45,7 @@
                 </li>
             
                 <li>
-                    <a data-toggle="tab" href="#menu1">Tasks <span class="badge badge-primary">{{ $user->projects->count() }}
+                    <a data-toggle="tab" href="#tasks">Tasks <span class="badge badge-primary">{{ $user->assignedTasks->count() }}
                     </span></a>
                 </li>
             </ul>
@@ -66,9 +66,32 @@
                 @endforeach
               </div>
 
-              <div id="menu1" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Some content in menu 1.</p>
+              <div id="tasks" class="tab-pane fade">
+                @php 
+                    $count = 0;
+                @endphp
+                <table class="table table-striped table-responsive">
+                    <tr>
+                      <th>{{ __('#')}} </th>
+                      <th>{{ __('Task')}}</th>
+                      <th>{{ __('Project')}}</th>
+                      <th>{{ __('Task Owner')}}</th>
+                      <th>{{ __('Status') }}</th>
+                      <th>{{ __('Deadline') }}</th>
+                    </tr>
+                @foreach($user->assignedtasks as $task)
+                    <tr>
+                        <td>{{ ++$count }}</td>
+                        <td>{{ $task->description }}</td>
+                        <td>
+                            <a href="{{ route('show_project',$task->project->id) }}" title="{{ $task->project->title }}">{{__('Project')}} </a>
+                        </td>
+                        <td><a href="{{ route('profile',$task->user->id) }}">{{ $task->user->name }}</a></td>
+                        <td>{{ $task->status === 0 ? "Open" : "Finished" }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+                </table>
               </div>
         </div>
        </div>
