@@ -17,7 +17,7 @@
 
            <div class="d-flex">
             <div><strong>{{ $project->tasks->count() }}</strong> {{ __('Task(s)') }}</div>
-            <div class="ml-2"><strong>3</strong> {{ __('People') }}</div>
+            <div class="ml-2"><strong>{{ $project->tasks->count() }}</strong> {{ __('People') }}</div>
            </div>
 
            <ul class="nav nav-tabs mt-4">
@@ -38,6 +38,7 @@
                       <th>{{ __('Priority') }}</th>
                       <th>{{ __('Task Status') }}</th>
                       <th>{{ __('Assigned to') }}</th>
+                      <th>{{ __('Due date') }}</th>
                     </tr>
                 @foreach($project->tasks as $task)
                   <tr>
@@ -49,13 +50,14 @@
                             <a href="{{ route('profile',$assignee->id) }}">{{ $assignee->name }}</a>,
                           @endforeach
                       </td>
+                      <td>{{ $task->due_date }}</td>
                   </tr>
                 @endforeach
                 </table>
               </div>
               <div id="tasks" class="tab-pane fade">
               <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
         <h3 class="mt-3"> {{ __('Add Task')}} </h3>
         <form action="{{ route('tasks.create') }}" method="post" enctype="multipart/form-data"> 
        @csrf
@@ -70,6 +72,21 @@
                 @if($errors->has('description'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group row">
+            <div>
+                <label for="due_date" class="col-md-12 col-form-label text-md-right"><strong>{{ __('Due Date') }}</strong></label>
+            </div>
+
+            <div class="col-md-12">
+                <input id="due_date" type="date" class="form-control{{ $errors->has('due_date') ? ' is-invalid' : '' }}" name="due_date" value="{{ old('duedate') }}" required autofocus>
+
+                @if($errors->has('due_date'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('due_date') }}</strong>
                     </span>
                 @endif
             </div>

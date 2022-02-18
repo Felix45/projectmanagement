@@ -15,10 +15,12 @@ class TasksController extends Controller
             'project_id'  => 'required|integer',
             'visibility'  => '',
             'priority'    => '',
+            'due_date' => 'required|date|after_or_equal:today',
             'assignee' => 'required'
         ]);
         $data['user_id'] = auth()->user()->id;
         $assignees = $data['assignee'];
+
         unset($data['assignee']);
        
         $task = auth()->user()->tasks()->create($data);
