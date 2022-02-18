@@ -32,17 +32,23 @@
 
             <div class="tab-content">
               <div id="projects" class="tab-pane active">
-                <table class="table table-striped table-condensed">
+                <table class="table table-striped table-responsive table-condensed">
                     <tr>
                       <th>{{ __('Description') }}</th>
                       <th>{{ __('Priority') }}</th>
                       <th>{{ __('Task Status') }}</th>
+                      <th>{{ __('Assigned to') }}</th>
                     </tr>
                 @foreach($project->tasks as $task)
                   <tr>
                       <td>{{ $task->description }}</td>
                       <td>{{ $task->priority == 1 ? "High" : "Low" }}</td>
                       <td>{{ $task->status == 1 ? "Closed" : "Open" }}</td>
+                      <td>
+                          @foreach($task->assignees as $assignee)
+                            <a href="{{ route('profile',$assignee->id) }}">{{ $assignee->name }}</a>,
+                          @endforeach
+                      </td>
                   </tr>
                 @endforeach
                 </table>
@@ -86,6 +92,24 @@
                 @if($errors->has('priority'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('priority') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <div class="col-md-12">
+               
+                <div>
+                    <label for="assignee" class="col-md-12 col-form-label pl-0"><strong>{{ __('Assign Task To') }}</strong></label>
+                </div>
+
+                <div>
+                    @foreach($users as $user)
+                        <input id="assignee" type="checkbox"  name="assignee[]" value="{{ $user->id }}" required autofocus> {{ $user->name }}
+                    @endforeach
+                </div>
+                @if($errors->has('assignee'))
+                    <span class="invalid-feedback" role="alert">
+                        
                     </span>
                 @endif
             </div>

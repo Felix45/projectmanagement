@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\User;
 
 class ProjectsController extends Controller
 {
@@ -29,8 +30,10 @@ class ProjectsController extends Controller
 
     public function show(Project $project){
 
+        $users = User::all()->except(auth()->user()->id);
         return view('projects.show',[
-            'project' => $project
+            'project' => $project,
+            'users' => $users
         ]);
     }
 

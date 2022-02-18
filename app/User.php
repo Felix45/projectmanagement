@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function profile(){
         return $this->hasOne(Profile::class);
     }
+
+    public function assignedTasks(){
+        return $this->belongsToMany(Task::class)->orderBy('created_at','DESC');
+    }
 }
