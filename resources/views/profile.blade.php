@@ -77,9 +77,12 @@
                       <th>{{ __('Project')}}</th>
                       <th>{{ __('Task Owner')}}</th>
                       <th>{{ __('Status') }}</th>
+                      <th>{{ __('Visibility') }}</th>
+                      <th>{{ __('Documents') }}</th>
                       <th>{{ __('Deadline') }}</th>
                     </tr>
                 @foreach($user->assignedtasks as $task)
+                @can('view',$task)
                     <tr>
                         <td>{{ ++$count }}</td>
                         <td>{{ $task->description }}</td>
@@ -88,17 +91,19 @@
                         </td>
                         <td><a href="{{ route('profile',$task->user->id) }}">{{ $task->user->name }}</a></td>
                         <td>{{ $task->status === 0 ? "Open" : "Finished" }}</td>
-                        <td></td>
+                        <td>{{ $task->visibility === 1 ? "Public" : "Private" }}</td>
+                        <td>
+                            @foreach($task->documents as $document)
+                                <a href="{{ '/uploads/'.$document->url }}" target="_blank">{{ __('Document') }}</a>
+                            @endforeach
+                        <td>{{ $task->due_date }}</td>
                     </tr>
+                @endcan
                 @endforeach
                 </table>
               </div>
         </div>
        </div>
-      
-            
-        
-
     </div>
 </div>
 @endsection

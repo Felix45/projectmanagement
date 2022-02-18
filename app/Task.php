@@ -16,6 +16,10 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public function documents(){
+        return $this->belongsToMany(Document::class);
+    }
+
     public function assignees(){
         return $this->belongsToMany(User::class);
     }
