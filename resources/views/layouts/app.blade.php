@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Project Tracker') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -76,5 +76,9 @@
             @yield('content')
         </main>
     </div>
+    <footer id="footer" class="footer pt-3 pb-3 mt-5" 
+            data-appname="{{ config('app.name', 'Project Tracker') }}" data-date="{{ date('Y') }}">
+    
+    </footer>
 </body>
 </html>
