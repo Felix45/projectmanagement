@@ -9,6 +9,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import "node_modules/font-awesome/scss/font-awesome.scss";
 
 .navbar-laravel {
   background-color: #fff;
@@ -33,6 +34,7 @@
   display: flex;
   justify-content: center;
   background: #fff url('/images/bg_home.svg') no-repeat;
+  background-size: contain;
 }
 
 .home .position-ref {
