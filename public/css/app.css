@@ -15085,6 +15085,10 @@ a.text-dark:focus {
   background-color: #182b5c;
 }
 
+.user-icon {
+  color: #182b5c;
+}
+
 .home {
   background-color: #fff;
   color: #636b6f;
