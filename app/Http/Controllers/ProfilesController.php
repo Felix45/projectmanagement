@@ -33,7 +33,11 @@ class ProfilesController extends Controller
         $data = request()->validate([
             'description' => 'required',
             'quote' => 'required',
+            'image' => 'required'
         ]);
+
+        $imagePath = request('image')->store('uploads','public');
+        $data['image'] = $imagePath;
 
         auth()->user()->profile->update($data);
 

@@ -4,7 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-            <img src="/images/logo.png" class="w-150 rounded-circle mb-3"/>
+            @if($project->user->profile->image)
+            <img src="/storage/{{ $project->user->profile->image }}" class="w-75 rounded-circle"/>
+          @else
+            <img src="/storage/uploads/default.png" class="w-75 rounded-circle"/>
+          @endif
             <div>
                 {{ __('Project Owner: ')}}
                 <a href="{{ route('profile',$project->user->id) }}">{{ $project->user->name }}</a>
