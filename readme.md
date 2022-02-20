@@ -16,6 +16,46 @@ Project Tracker App attempts to take the pain out of assigning of tasks via emai
 - Users can view daily summaries of other users. i.e recieved tasks, completed tasks, pending tasks.
 - Users can generate reports on assigned tasks.
 
+## Installation
+
+- Clone the repository from github and change directory to projectmanagement
+
+ ``` 
+    $ git clone https://github.com/Felix45/projectmanagement.git
+    $ cd projectmanagement
+```
+- Install all the application dependencies 
+ 
+ ```
+  $ composer install
+  $ npm install
+  $ npm run dev
+
+  ````
+- Setup a MYSQL database on your computer
+- Rename the .env.example to  .env file and change the following environment variables
+
+``` 
+    DB_DATABASE = dbname
+    DB_USERNAME = dbuser
+    DB_PASSWORD = dbpassword 
+```
+- Create all database tables and dummy data
+   
+   ``` 
+    $ php artisan migrate:refresh –seed
+
+    ```
+
+- Start the laravel application
+
+ ```
+    $ php artisan serve
+
+ ```
 ## License
 
 The Project Tracker App is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Author
+Felix Ouma

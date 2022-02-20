@@ -11,7 +11,6 @@ class ProfilesTableSeeder extends Seeder
      */
     public function run()
     {
-        /*
         DB::table('profiles')->insert([
                 [
                     'user_id' => 1,
@@ -34,6 +33,6 @@ class ProfilesTableSeeder extends Seeder
                     'description' => 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam vel, culpa neque facere maiores, debitis, blanditiis commodi quos alias at vitae totam. Id commodi labore, culpa maiores delectus cupiditate pariatur.'
                 ]
         ]);
-        */
+        
     }
 }

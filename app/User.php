@@ -37,8 +37,8 @@ class User extends Authenticatable
     protected static function boot(){
         parent::boot();
         static::created(function($user){$user->profile()->create(['quote' => '','description' => '']); });
-        static::created(function($user){$user->roles()->attach([3]); });
-        static::created(function($user){$user->permissions()->attach([1,3]); });
+        //static::created(function($user){$user->roles()->attach([3]); });
+        //static::created(function($user){$user->permissions()->attach([1,3]); });
     }
 
     public function tasks(){
