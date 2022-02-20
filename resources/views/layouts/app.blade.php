@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Project Tracker') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -42,10 +42,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link " href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link " href="{{ route('login') }}">
+                                <span class="fa fa-sign-in"></span> {{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary font-weight-bold" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="btn btn-primary font-weight-bold" href="{{ route('register') }}">
+                                    <span class="fa fa-user-plus"></span> {{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -76,5 +78,9 @@
             @yield('content')
         </main>
     </div>
+    <footer id="footer" class="footer pt-3 pb-3 mt-5" 
+            data-appname="{{ config('app.name', 'Project Tracker') }}" data-date="{{ date('Y') }}">
+    
+    </footer>
 </body>
 </html>

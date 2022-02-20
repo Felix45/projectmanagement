@@ -9,12 +9,14 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import "node_modules/font-awesome/scss/font-awesome.scss";
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
+.footer{color:$body-bg; background-color: $blue;}
+.user-icon{color: $blue;}
 .home {
   background-color: #fff;
   color: #636b6f;
@@ -33,6 +35,7 @@
   display: flex;
   justify-content: center;
   background: #fff url('/images/bg_home.svg') no-repeat;
+  background-size: contain;
 }
 
 .home .position-ref {
