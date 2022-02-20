@@ -25,8 +25,8 @@
                <div class="pr-5"><strong>Pending tasks</strong> 3</div>
            </div>
            <div>
-               <div><strong>Department</strong></div>
-               <div>Information Communication Technology</div>
+               <div><strong>{{__('Responsibility')}}</strong></div>
+               <div>{{ $user->roles()->first()->name }}</div>
                <div class="pt-3 pb-3 text-justify">{{$user->profile->description}}</div>
                <div class="pt-3 pb-1 text-justify">
                    <blockquote class="blockquote">{{$user->profile->quote}}</blockquote>

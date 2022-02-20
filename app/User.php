@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Permissions\HasPermissionsTrait;
+
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermissionsTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -33,12 +36,9 @@ class User extends Authenticatable
 
     protected static function boot(){
         parent::boot();
-        static::created(function($user){
-            $user->profile()->create([
-                'quote' => '',
-                'description' => ''
-            ]);
-        });
+        static::created(function($user){$user->profile()->create(['quote' => '','description' => '']); });
+        static::created(function($user){$user->roles()->attach([3]); });
+        static::created(function($user){$user->permissions()->attach([1,3]); });
     }
 
     public function tasks(){
@@ -47,6 +47,14 @@ class User extends Authenticatable
 
     public function profile(){
         return $this->hasOne(Profile::class);
+    }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class)->orderBy('created_at','DESC');
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class)->orderBy('created_at','DESC');
     }
 
     public function assignedTasks(){
