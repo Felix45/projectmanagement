@@ -31,8 +31,12 @@ class ProfilesController extends Controller
             'image' => 'required'
         ]);
 
-        $imagePath = request('image')->store('uploads','public');
-        $data['image'] = $imagePath;
+        $file = request()->file('image');
+        $fileName = time().'.'.$file->extension();
+        $imagePath = public_path().'/images/';
+        $file->move($imagePath,$fileName);
+
+        $data['image'] = '/images/'.$fileName;
 
         auth()->user()->profile->update($data);
 

@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-md-3 text-center">
             @if($project->user->profile->image)
-            <img src="/storage/{{ $project->user->profile->image }}" class="w-75 rounded-circle"/>
+            <img src="{{ $project->user->profile->image }}" class="w-75 rounded-circle"/>
           @else
-            <img src="/storage/uploads/default.png" class="w-75 rounded-circle"/>
+            <img src="/images/default.png" class="w-75 rounded-circle"/>
           @endif
             <div>
                 {{ __('Project Owner: ')}}
