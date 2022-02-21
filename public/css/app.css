@@ -15084,6 +15084,13 @@ a.text-dark:focus {
   max-width: 100%;
 }
 
+.project {
+  width: 33.33%;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #fafafa;
+}
+
 .footer {
   color: #fff;
   background-color: #182b5c;
@@ -15093,12 +15100,17 @@ a.text-dark:focus {
   color: #182b5c;
 }
 
+.title {
+  font-size: 60px;
+  font-weight: bold;
+}
+
 .home {
   background-color: #fff;
   color: #636b6f;
   font-family: 'Raleway', sans-serif;
   font-weight: 100;
-  height: 60vh;
+  height: 50vh;
   margin: 0;
 }
 
@@ -15134,11 +15146,6 @@ a.text-dark:focus {
   text-align: center;
 }
 
-.title {
-  font-size: 60px;
-  font-weight: bold;
-}
-
 .home .links > a {
   color: #636b6f;
   padding: 0 25px;
@@ -15154,9 +15161,12 @@ a.text-dark:focus {
 }
 
 @media (max-width: 767px) {
-  .home,
   .home .flex-center {
     height: 0vh;
+  }
+
+  .project {
+    width: 100%;
   }
 }
 

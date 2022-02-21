@@ -5,16 +5,16 @@
     <div class="row">
         <div class="col-md-3 text-center">
           @if($user->profile->image)
-            <img src="/storage/{{ $user->profile->image }}" class="w-75 rounded-circle"/>
+            <img src="{{ $user->profile->image }}" class="w-75 rounded-circle"/>
           @else
-            <img src="/storage/uploads/default.png" class="w-75 rounded-circle"/>
+            <img src="/images/default.png" class="w-75 rounded-circle"/>
           @endif
         </div>
         <div class="col-md-9">
            <div class="d-flex justify-content-between align-items-baseline">
                <h1>{{ $user->name }}</h1>
                @can('update',$user->profile)
-                <a href="{{ route('create_project')}}" class="btn btn-sm btn-primary font-weight-bold">Create New Project</a>
+                <a href="{{ route('create_project')}}" class="btn btn-sm btn-primary font-weight-bold">{{ __('Create New Project') }}</a>
                 @endcan
            </div>
             @can('update',$user->profile)
@@ -24,9 +24,9 @@
             @endcan
            
            <div class="d-flex">
-               <div class="pr-5"><strong>{{ $user->projects->count() }}</strong> Project(s)</div>
-               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> Assigned tasks</div>
-               <div class="pr-5"><strong>Pending tasks</strong> 3</div>
+               <div class="pr-5"><strong>{{ $user->projects->count() }}</strong>{{ __('Project(s)') }}</div>
+               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> {{ __('Assigned task(s)') }}</div>
+               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> {{__('Pending task(s)') }}</div>
            </div>
            <div>
                <div><strong>{{__('Responsibility')}}</strong></div>
@@ -57,13 +57,14 @@
            <div class="tab-content">
               <div id="projects" class="tab-pane active">
                 @foreach($user->projects as $project)
-                    <div class="mb-4" style="display:inline-block;width:33%;">
+                    <div class="mb-4 mr-3 project p-4">
                         <h6><a href="{{ route('show_project',$project->id) }}"><strong>{{ $project->title }}</strong></a></h6>
-                        <div>{{__('Date: ') }} {{ $project->created_at }}</div>
+                        <hr/>
+                        <div>{{__('Tasks: ') }} {{ $project->tasks()->count() }}</div>
                         <div class="pull-left align-items-baseline">
-                            {{ __('Project Owner ') }} <a href="" class="pr-2 pl-1"> {{ $project->user->name }}</a>
+                            {{ __('Project Owner ') }} <a href="{{ route('show_project',$project->user->id) }}" class="pr-2 pl-1"> {{ $project->user->name }}</a>
                             @can('update',$project)
-                                <a href="" class="btn btn-sm btn-primary font-weight-bold">{{__('Add Task(s)')}} </a>
+                                <a href="{{ route('show_project',$project->id) }}" class="btn btn-sm btn-primary font-weight-bold">{{__('Add Task(s)')}} </a>
                             @endcan
                         </div>
                     </div>
