@@ -15161,6 +15161,7 @@ a.text-dark:focus {
 }
 
 @media (max-width: 767px) {
+  .home,
   .home .flex-center {
     height: 0vh;
   }

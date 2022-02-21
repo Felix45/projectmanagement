@@ -83,10 +83,8 @@
 
 
 @media(max-width: 767px) {
-  .home{
-        .flex-center{
+  .home, .home .flex-center{
           height: 0vh;
-        }
    }
   .project{
     width: 100%;
