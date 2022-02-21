@@ -20,39 +20,45 @@ Project Tracker App attempts to take the pain out of assigning of tasks via emai
 
 - Clone the repository from github and change directory to projectmanagement
 
- ``` 
-    $ git clone https://github.com/Felix45/projectmanagement.git
-    $ cd projectmanagement
-```
+    ``` 
+        $ git clone https://github.com/Felix45/projectmanagement.git
+        $ cd projectmanagement
+    ```
 - Install all the application dependencies 
  
- ```
-  $ composer install
-  $ npm install
-  $ npm run dev
+    ```
+        $ composer install
+        $ npm install
+        $ npm run dev
 
-  ````
+    ```
 - Setup a MYSQL database on your computer
 - Rename the .env.example to  .env file and change the following environment variables
 
-``` 
-    DB_DATABASE = dbname
-    DB_USERNAME = dbuser
-    DB_PASSWORD = dbpassword 
-```
+    ``` 
+        DB_DATABASE = dbname
+        DB_USERNAME = dbuser
+        DB_PASSWORD = dbpassword 
+    ```
+- Generate the laravel application key 
+   
+   ``` 
+        $ php artisan key:generate
+
+    ```
 - Create all database tables and dummy data
    
    ``` 
-    $ php artisan migrate:refresh –seed
+        $ php artisan migrate:refresh –seed
 
     ```
 
 - Start the laravel application
 
- ```
-    $ php artisan serve
+    ```
+        $ php artisan serve
 
- ```
+    ```
 ## License
 
 The Project Tracker App is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
