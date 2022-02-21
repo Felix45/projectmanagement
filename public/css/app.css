@@ -15080,6 +15080,10 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.img {
+  max-width: 100%;
+}
+
 .footer {
   color: #fff;
   background-color: #182b5c;
@@ -15147,5 +15151,12 @@ a.text-dark:focus {
 
 .home .m-b-md {
   margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  .home,
+  .home .flex-center {
+    height: 0vh;
+  }
 }
 

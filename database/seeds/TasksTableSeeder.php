@@ -54,5 +54,25 @@ class TasksTableSeeder extends Seeder
                 'description' => 'Design graduation booklet'
             ],
         ]);
+
+        $task_one = App\Task::find(1);
+        $task_one->documents()->attach([1]);
+        $task_one->assignees()->attach([2,3,4]);
+
+        $task_two = App\Task::find(2);
+        $task_two->documents()->attach([2,3]);
+        $task_two->assignees()->attach([3,4]);
+
+        $task_three = App\Task::find(3);
+        $task_three->documents()->attach([1,3]);
+        $task_three->assignees()->attach([2,3,4]);
+
+        $task_four = App\Task::find(4);
+        $task_four->documents()->attach([3,4]);
+        $task_four->assignees()->attach([1,3,4]);
+
+        $task_five = App\Task::find(5);
+        $task_five->documents()->attach([4]);
+        $task_five->assignees()->attach([1,2,4]);
     }
 }

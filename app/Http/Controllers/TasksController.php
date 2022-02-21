@@ -21,7 +21,7 @@ class TasksController extends Controller
             'assignee' => 'required'
         ]);
         
-        /*$data['user_id'] = auth()->user()->id;
+        $data['user_id'] = auth()->user()->id;
         $assignees = $data['assignee'];
 
         unset($data['assignee']);
@@ -31,7 +31,6 @@ class TasksController extends Controller
         $users = User::find($assignees);
         
         $task->assignees()->attach($users);
-        */
 
         $files = [];
         $documents = [];
@@ -43,12 +42,11 @@ class TasksController extends Controller
             $files['url'] = $name;
 
             $document = Document::create($files);
-            array_push($documents,[$document->id,$file->getClientOriginalName()]);
+            array_push($documents,$document->id);
 
         }
-        dd($documents);
-        //$docs = Document::find($documents);
-        //$task->documents()->attach($docs);
+        $docs = Document::find($documents);
+        $task->documents()->attach($docs);
 
         return redirect('/project/'.$data['project_id']);
     }

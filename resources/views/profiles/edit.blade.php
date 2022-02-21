@@ -11,15 +11,15 @@
        <h1>{{ __('Edit Profile') }}</h1>
        <div class="form-group row">
             <div>
-                <label for="photo" class="col-md-12 col-form-label text-md-right"><strong>{{ __('Profile Photo') }}</strong></label>
+                <label for="image" class="col-md-12 col-form-label text-md-right"><strong>{{ __('Profile Photo') }}</strong></label>
             </div>
 
             <div class="col-md-12">
-                <input id="photo" type="file" class="form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}" name="photo" value="{{ old('photo') ?? $user->profile->photo }}" autofocus>
+                <input id="image" type="file" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" autofocus>
 
-                @if($errors->has('photo'))
+                @if($errors->has('image'))
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('photo') }}</strong>
+                        <strong>{{ $errors->first('image') }}</strong>
                     </span>
                 @endif
             </div>

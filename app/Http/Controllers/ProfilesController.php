@@ -9,14 +9,9 @@ use Illuminate\Http\Request;
 class ProfilesController extends Controller
 {
     //
-    public function index($user){
-        $user = User::findOrFail($user);
-
-        return view('profile',
-           [
-             'user' => $user
-           ]
-        );
+    public function index(User $user){
+    
+        return view('profile',compact('user'));
     }
 
     public function edit(User $user){
@@ -33,7 +28,11 @@ class ProfilesController extends Controller
         $data = request()->validate([
             'description' => 'required',
             'quote' => 'required',
+            'image' => 'required'
         ]);
+
+        $imagePath = request('image')->store('uploads','public');
+        $data['image'] = $imagePath;
 
         auth()->user()->profile->update($data);
 

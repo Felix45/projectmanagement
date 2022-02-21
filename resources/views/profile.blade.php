@@ -4,7 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 text-center">
-          <img src="/images/logo.png" class="w-150 rounded-circle"/>
+          @if($user->profile->image)
+            <img src="/storage/{{ $user->profile->image }}" class="w-75 rounded-circle"/>
+          @else
+            <img src="/storage/uploads/default.png" class="w-75 rounded-circle"/>
+          @endif
         </div>
         <div class="col-md-9">
            <div class="d-flex justify-content-between align-items-baseline">

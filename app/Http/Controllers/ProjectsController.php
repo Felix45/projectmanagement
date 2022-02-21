@@ -23,9 +23,9 @@ class ProjectsController extends Controller
             'description' => 'string|required'
         ]);
 
-        auth()->user()->projects()->create($data);
+        $project = auth()->user()->projects()->create($data);
 
-        return redirect('/profile/'.auth()->user()->id);
+        return redirect('/project/'.$project->id);
     }
 
     public function show(Project $project){
