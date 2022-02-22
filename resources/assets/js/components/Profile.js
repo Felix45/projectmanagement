@@ -7,7 +7,7 @@ export default class Profile extends Component {
           <div>
             <div className="d-flex mb-2 align-items-center">
                <div className="pr-5">
-                   <span class="badge badge-primary p-1 mr-1">{ this.props.data.projects }</span>Project(s)
+                   <span className="badge badge-primary p-1 mr-1">{ this.props.data.projects }</span>Project(s)
                </div>
                <div className="pr-5">
                    <span className="badge badge-success p-1 mr-1">{ this.props.data.assigned }</span>Assigned task(s)
