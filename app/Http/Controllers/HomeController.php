@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $this->middleware('auth');
-        return view('home');
+        return redirect('/profile/'.auth()->user()->id);
     }
 
     public function home(){

@@ -31,10 +31,7 @@ class ProjectsController extends Controller
     public function show(Project $project){
 
         $users = User::all()->except(auth()->user()->id);
-        return view('projects.show',[
-            'project' => $project,
-            'users' => $users
-        ]);
+        return view('projects.show',compact('project','users'));
     }
 
     
