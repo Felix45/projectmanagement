@@ -43,6 +43,11 @@ class ProjectPolicy
     public function update(User $user, Project $project)
     {
         //
+        foreach($project->tasks as $task)
+            if($task->assignees()->find($user->id))
+              return true;
+        
+        
         return $user->id === $project->user_id;
     }
 

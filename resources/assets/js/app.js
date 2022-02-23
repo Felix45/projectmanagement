@@ -14,5 +14,8 @@ require('./bootstrap');
  */
 
 require('./components/Example');
+require('./components/Project');
 require('./components/Footer');
 require('./components/UserIcon');
+require('./components/Profile');
+

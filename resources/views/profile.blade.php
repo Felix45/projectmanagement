@@ -22,19 +22,20 @@
                 <a href="{{ route('profiles.edit',$user->id)}}/" class="font-weight-bold">{{ __('Edit profile') }}</a>
             </div>
             @endcan
+            @php
+               $data = [
+                   'projects' => $user->projects->count(), 
+                   'assigned' => $user->assignedTasks->count(),
+                   'pending'  => $user->assignedTasks->count(),
+                   'responsibility' => $user->roles()->first()->name,
+                   'description' => $user->profile->description,
+                   'quote' => $user->profile->quote,
+                   'email' => $user->email
+               ];     
+            @endphp
+           <div id="rprofile" data-profile="{{ json_encode($data) }}"></div>
            
-           <div class="d-flex">
-               <div class="pr-5"><strong>{{ $user->projects->count() }}</strong>{{ __('Project(s)') }}</div>
-               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> {{ __('Assigned task(s)') }}</div>
-               <div class="pr-5"><strong>{{ $user->assignedTasks->count() }}</strong> {{__('Pending task(s)') }}</div>
-           </div>
            <div>
-               <div><strong>{{__('Responsibility')}}</strong></div>
-               <div>{{ $user->roles()->first()->name }}</div>
-               <div class="pt-3 pb-3 text-justify">{{$user->profile->description}}</div>
-               <div class="pt-3 pb-1 text-justify">
-                   <blockquote class="blockquote">{{$user->profile->quote}}</blockquote>
-                </div>
                <div><a href="mailto:{{$user->email}}">Email: {{$user->email}}</a></div>
            </div>
         </div>    
@@ -44,7 +45,7 @@
            <h2>{{ __('Assignments') }}</h2>
            <ul class="nav nav-tabs mb-4">
                 <li class="active">
-                    <a data-toggle="tab" href="#projects" class="mr-3">My Projects <span class="badge badge-primary">{{ $user->projects->count() }}
+                    <a data-toggle="tab" href="#rproject" class="mr-3">My Projects <span class="badge badge-primary">{{ $user->projects->count() }}
                     </span></a>
                 </li>
             
@@ -55,20 +56,17 @@
             </ul>
 
            <div class="tab-content">
-              <div id="projects" class="tab-pane active">
+                @php $all_projects = [] @endphp
                 @foreach($user->projects as $project)
-                    <div class="mb-4 mr-3 project p-4">
-                        <h6><a href="{{ route('show_project',$project->id) }}"><strong>{{ $project->title }}</strong></a></h6>
-                        <hr/>
-                        <div>{{__('Tasks: ') }} {{ $project->tasks()->count() }}</div>
-                        <div class="pull-left align-items-baseline">
-                            {{ __('Project Owner ') }} <a href="{{ route('show_project',$project->user->id) }}" class="pr-2 pl-1"> {{ $project->user->name }}</a>
-                            @can('update',$project)
-                                <a href="{{ route('show_project',$project->id) }}" class="btn btn-sm btn-primary font-weight-bold">{{__('Add Task(s)')}} </a>
-                            @endcan
-                        </div>
-                    </div>
+                    @php
+                        $project['user_name'] = $project->user->name;
+                        $project['edit']  = auth()->check() ? auth()->user()->can('update',$project) : false;
+                        $project['task_count'] = $project->tasks()->count();
+                        $all_projects[] = $project; 
+                    @endphp
                 @endforeach
+              <div id="rproject" class="tab-pane active" data-projects="{{ json_encode($all_projects) }}">
+            
               </div>
 
               <div id="tasks" class="tab-pane fade">
