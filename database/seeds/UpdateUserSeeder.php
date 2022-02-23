@@ -20,7 +20,7 @@ class UpdateUserSeeder extends Seeder
         $perm_delete = App\Permission::find(4);
 
         $user_one = App\User::find(1);
-        $user_one->roles()->attach($role_supervisor);
+        $user_one->roles()->sync($role_supervisor);
         $user_one->permissions()->attach([$perm_edit->id,$perm_view->id,$perm_delete->id]);
 
     }
