@@ -29,8 +29,6 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'remember_token' => str_random(10),
         ]);
-        $user_one->roles()->attach($role_supervisor);
-        $user_one->permissions()->attach([$perm_edit->id,$perm_view->id,$perm_delete->id]);
 
         $user_two = App\User::create([
                 'name' => 'Emily Atkins',
